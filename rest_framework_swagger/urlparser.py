@@ -81,6 +81,7 @@ class UrlParser(object):
                 path = path.replace('api', '').split('/')[1]
             resource = path.replace(base_path, '').split('/')[0]
             filtered_paths.add(base_path + resource)
+        return list(filtered_paths)
 
 
     def __get_base_path__(self, root_paths):
