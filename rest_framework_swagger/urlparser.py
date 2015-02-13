@@ -75,11 +75,13 @@ class UrlParser(object):
         """
         filtered_paths = set()
         base_path = self.__get_base_path__(root_paths)
+
         for path in root_paths:
+            if path.startswith('api'):
+                path = path.replace('api', '').split('/')[1]
             resource = path.replace(base_path, '').split('/')[0]
             filtered_paths.add(base_path + resource)
 
-        return list(filtered_paths)
 
     def __get_base_path__(self, root_paths):
         base_path = os.path.commonprefix(root_paths)
