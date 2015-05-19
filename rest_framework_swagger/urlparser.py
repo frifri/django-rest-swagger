@@ -1,7 +1,9 @@
+import re
 import os
+from importlib import import_module
+
 from django.conf import settings
 from django.utils import six
-from django.utils.importlib import import_module
 from django.core.urlresolvers import RegexURLResolver, RegexURLPattern
 from django.contrib.admindocs.views import simplify_regex
 
@@ -110,7 +112,7 @@ class UrlParser(object):
         path = simplify_regex(prefix + pattern.regex.pattern)
 
         if filter_path is not None:
-            if filter_path not in path:
+            if re.match('^/?%s(/.*)?$' % re.escape(filter_path), path) is None:
                 return None
 
         path = path.replace('<', '{').replace('>', '}')
@@ -144,7 +146,7 @@ class UrlParser(object):
 
             elif isinstance(pattern, RegexURLResolver):
 
-                if pattern.namespace in exclude_namespaces:
+                if pattern.namespace is not None and pattern.namespace in exclude_namespaces:
                     continue
 
                 pref = prefix + pattern.regex.pattern

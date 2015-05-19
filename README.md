@@ -7,7 +7,7 @@
 
 ####An API documentation generator for Swagger UI and Django REST Framework
 
-This project is built on the [Django REST Framework Docs](https://github.com/marcgibbons/django-rest-framework-docs) and uses the lovely [Swagger from Wordnik](https://developers.helloreverb.com/swagger/) as an interface. This application introspectively generates documentation based on your Django REST Framework API code. Comments are generated in combination from code analysis and comment extraction. Here are some of the features that are documented:
+This project is built on the [Django REST Framework Docs](https://github.com/marcgibbons/django-rest-framework-docs) and uses the lovely [Swagger from Wordnik](http://swagger.io) as an interface. This application introspectively generates documentation based on your Django REST Framework API code. Comments are generated in combination from code analysis and comment extraction. Here are some of the features that are documented:
 
 * API title - taken from the class name
 * Methods allowed
@@ -16,10 +16,34 @@ This project is built on the [Django REST Framework Docs](https://github.com/mar
 * URL parameters (ie. /product/{id})
 * Field `help_text` property is used to create the description from the serializer or model.
 
+## Quick start
+
+1. ```pip install django-rest-swagger```
+
+2. Add `rest_framework_swagger` to your `INSTALLED_APPS` setting:
+
+    ```python
+        INSTALLED_APPS = (
+            ...
+            'rest_framework_swagger',
+        )
+    ```
+
+3. Include the rest_framework_swagger URLs to a path of your choice
+
+    ```python
+    patterns = ('',
+        ...
+        url(r'^docs/', include('rest_framework_swagger.urls')),
+    )
+    ```
+
+for more information, see the [documentation][docs].
+
 ## Requirements
 * Python (2.6.5+, 2.7, 3.2, 3.3, 3.4)
-* Django (1.5.5+, 1.6, 1.7)
-* Django REST framework (2.3.5+)
+* Django (1.5.5+, 1.6, 1.7, 1.8)
+* Django REST framework (2.3.8+)
 
 ## Bugs & Contributions
 Please report bugs by opening an issue
