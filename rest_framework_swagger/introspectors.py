@@ -106,8 +106,7 @@ class IntrospectorHelper(object):
         Returns the first sentence of the first line of the class docstring
         """
         description = get_view_description(
-            callback, html=False, docstring=docstring) \
-            .split("\n")[0].split(".")[0]
+            callback, html=False, docstring=docstring)
         description = IntrospectorHelper.strip_yaml_from_docstring(
             description)
         description = IntrospectorHelper.strip_params_from_docstring(
